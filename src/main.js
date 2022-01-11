@@ -1,28 +1,29 @@
 import Navigo from "navigo";
-import Header from "./components/header";
-import HomePage from "./pages/home";
-import AboutPage from "./pages/about";
 import Footer from "./components/footer";
+import Header from "./components/header";
+import AboutPage from "./pages/about";
+import HomePage from "./pages/home";
+import NewsDetail from "./pages/newsDetail";
 
-const header = document.querySelector("#header");
-const main = document.querySelector("#main");
-const footer = document.querySelector("#footer");
+const router = new Navigo("/", { linksSelector: "a" });
 
-const render = (content) => {
-    header.innerHTML = Header.show();
-    main.innerHTML = content.show();
-    footer.innerHTML = Footer.show();
+const print = (content) => {
+    document.getElementById("header").innerHTML = Header.render();
+    document.getElementById("content").innerHTML = content;
+    document.getElementById("footer").innerHTML = Footer.render();
 };
 
-const route = new Navigo("/", { linksSelector: "a" });
-
-route.on({
+router.on({
     "/": () => {
-        render(HomePage);
+        print(HomePage.render());
     },
     "/about": () => {
-        render(AboutPage);
+        print(AboutPage.render());
+    },
+    "/news/:id": ({ data }) => { //destructuring
+        const { id } = data;
+        print(NewsDetail.render(id));
     },
 });
 
-route.resolve();
+router.resolve();

@@ -1,7 +1,6 @@
 const Footer = {
-    show: () => `<footer class="bg-blue-900 py-4 mt-5 flex justify-center">
-                    <span class="text-white">ĐẶNG ĐÌNH KHẢI</span>
-                 </footer>`,
+    render() {
+        return `<footer class="max-w-5xl text-center py-4 bg-blue-800 mx-auto">Footer</footer>`;
+    },
 };
-
 export default Footer;
